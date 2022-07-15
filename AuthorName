@@ -1,0 +1,24 @@
+def get_Authors(Authors):
+    user = {}
+    try:
+        conn = connect_to_db()
+        conn.row_factory = sqlite3.Row
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM users WHERE Authors = ?",
+                       (Authors,))
+        row = cur.fetchone()
+
+        # convert row object to dictionary
+            user["Id"] = i["Id"]
+            user["ISBN"] = i["ISBN"]
+            user["Authors"] = i["Authors"]
+            user["Publication_Year"] = i["Publication_Year"]
+            user["Title"] = i["Title"]
+            user["Language"] = i["Language"]
+            user["IssueDate"] = i["IssueDate"]
+            user["ReturningDate"] = i["ReturningDate"]
+            users.append(user)
+    except:
+        user = {}
+
+    return user

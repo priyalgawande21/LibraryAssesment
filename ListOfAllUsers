@@ -1,0 +1,28 @@
+#This will return all list of user
+def get_users():
+    users = []
+    try:
+        conn = connect_to_db()
+        conn.row_factory = sqlite3.Row
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM users")
+        rows = cur.fetchall()
+
+        # convert row objects to dictionary
+        for i in rows:
+            user = {}
+            user["Id"] = i["Id"]
+            user["ISBN"] = i["ISBN"]
+            user["Authors"] = i["Authors"]
+            user["Publication_Year"] = i["Publication_Year"]
+            user["Title"] = i["Title"]
+            user["Language"] = i["Language"]
+            user["IssueDate"] = i["IssueDate"]
+            user["ReturningDate"] = i["ReturningDate"]
+
+            users.append(user)
+
+    except:
+        users = []
+
+    return users
